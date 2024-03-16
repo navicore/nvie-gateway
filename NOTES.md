@@ -1,149 +1,92 @@
 from chatgpt
 ---------
 
-__1. Foundation and Planning
-Understanding Concepts and Tools
-
-    Kubernetes Ingress: Research how Ingress controllers work, their role in
-    managing access to services inside a Kubernetes cluster, and their
-    interaction with other K8s resources. Rust Language: Ensure a good
-    understanding of Rust, focusing on asynchronous programming, network
-    programming, and familiarity with the Tokio runtime or any other async
-    runtime in Rust. eBPF for Monitoring and Logging: Learn how eBPF works,
-    especially in the context of networking and Kubernetes. Look into existing
-    tools like bcc or bpftrace for examples.
-
-Project Setup
-
-    Environment Setup: Install Rust, Kubernetes (Minikube or kind for local
-    testing), and any necessary Rust tooling (e.g., cargo, clippy). Project
-    Structure: Initialize your Rust project with Cargo. Plan your module
-    structure focusing on clarity and maintainability.
-
-2. Core Development
-Ingress Controller Basics
-
-    K8s API Interaction: Use the kube-rs crate to interact with the Kubernetes
-    API. Start with watching Ingress resources and understanding how to react to
-    their changes. Networking: Implement the basic networking logic to route
-    external requests to the correct services within the cluster. Libraries like
-    hyper (HTTP) and tokio (async I/O) will be helpful here.
-
-Simple Routing Logic
-
-    Path-based Routing: Start with implementing path-based routing. Parse the
-    incoming HTTP requests and route them to the correct service based on the
-    Ingress rules. Service Discovery: Implement dynamic service discovery to
-    resolve service names to their internal cluster IPs and ports.
-
-3. Monitoring and Logging with eBPF
-eBPF Integration
-
-    eBPF Basics: Use the redbpf crate for integrating eBPF programs into your
-    project. Focus on capturing networking events relevant to your ingress
-    traffic. Metrics Collection: Design eBPF programs to collect metrics like
-    request count, response status codes, and response times. Logging: Implement
-    logging of HTTP request and response metadata for debugging purposes.
-
-4. Observability and Operations
-Monitoring Setup
-
-    Metrics Export: Use Prometheus or another monitoring tool compatible with
-    your eBPF metrics. Ensure your ingress controller exposes a metrics endpoint
-    for scraping. Dashboard: Consider setting up a Grafana dashboard to
-    visualize the metrics your controller reports.
-
-Logging and Debugging
-
-    Structured Logging: Use a Rust logging framework (e.g., tracing or log) for
-    structured logging throughout your application. Integrate these logs with
-    your eBPF-collected data for a comprehensive view. Testing and Validation:
-    Write unit and integration tests, particularly for your routing logic and
-    eBPF programs. Test your controller in a real Kubernetes cluster to validate
-    its behavior under different scenarios.
-
-5. Documentation and Sharing
-
-    Write Documentation: Document the design and usage of your Ingress
-    controller, including how to deploy it in a Kubernetes cluster and how to
-    configure it. Open Source Contributions: Consider open-sourcing your project
-    on GitHub. Provide clear installation instructions, usage examples, and
-    contribution guidelines.
-
-6. Iteration and Feedback
-
-    Gather Feedback: Share your project with the Kubernetes and Rust communities
-    for feedback. Engage with users and contributors to identify areas for
-    improvement. Continuous Improvement: Iterate on your project based on
-    feedback and your own observations. Consider adding more features like
-    support for HTTPS, load balancing strategies, or more complex routing rules.
-
-By following this plan, you'll learn about Kubernetes, Rust, network
-programming, and observability in depth. The key to success in such a project is
-to start with a simple, working version and iteratively enhance its capabilities
-based on feedback and new learning.__
-
 PIVOT to GATEWAY API
 =========
+
 1. Deep Dive into the Gateway API
 Familiarize Yourself
 
-    Documentation: Start with the official Kubernetes Gateway API documentation to understand the concepts, resources, and their relationships.
-    Community Resources: Engage with community resources such as tutorials, webinars, and GitHub discussions to gain deeper insights and practical knowledge.
+    Documentation: Start with the official Kubernetes Gateway API documentation
+    to understand the concepts, resources, and their relationships. Community
+    Resources: Engage with community resources such as tutorials, webinars, and
+    GitHub discussions to gain deeper insights and practical knowledge.
 
 Understand the API Design
 
-    Resource Hierarchy: Study the resource model including GatewayClass, Gateway, HTTPRoute, TCPRoute, etc., and their intended use cases.
-    Core Concepts: Grasp core concepts such as multi-tenancy support, declarative configuration, and the separation of concerns between different roles (e.g., cluster operators, application developers).
+    Resource Hierarchy: Study the resource model including GatewayClass,
+    Gateway, HTTPRoute, TCPRoute, etc., and their intended use cases. Core
+    Concepts: Grasp core concepts such as multi-tenancy support, declarative
+    configuration, and the separation of concerns between different roles (e.g.,
+    cluster operators, application developers).
 
 2. Setting Up Your Development Environment
 Tools and Technologies
 
-    Kubernetes Cluster: Ensure you have a Kubernetes cluster set up for development and testing, using Minikube, kind, or a cloud-based Kubernetes service.
-    Rust Development: Set up your Rust development environment, focusing on async programming and network programming libraries.
+    Kubernetes Cluster: Ensure you have a Kubernetes cluster set up for
+    development and testing, using Minikube, kind, or a cloud-based Kubernetes
+    service. Rust Development: Set up your Rust development environment,
+    focusing on async programming and network programming libraries.
 
 Project Skeleton
 
-    Cargo Project: Initialize a new Cargo project for your Gateway API implementation.
-    Structure: Define a modular project structure that allows for scalability and easy maintenance.
+    Cargo Project: Initialize a new Cargo project for your Gateway API
+    implementation. Structure: Define a modular project structure that allows
+    for scalability and easy maintenance.
 
 3. Implementing Core Features
 Gateway API Resources
 
-    Resource Watching: Implement logic to watch and react to changes in Gateway API resources using the kube-rs crate or similar libraries.
-    Routing Logic: Develop the core routing logic for different types of routes (e.g., HTTPRoute, TCPRoute) according to the Gateway API specifications.
+    Resource Watching: Implement logic to watch and react to changes in Gateway
+    API resources using the kube-rs crate or similar libraries. Routing Logic:
+    Develop the core routing logic for different types of routes (e.g.,
+    HTTPRoute, TCPRoute) according to the Gateway API specifications.
 
 Traffic Handling
 
-    Networking: Utilize Rust's asynchronous networking libraries to handle ingress and potentially egress traffic based on the Gateway API resources' configurations.
+    Networking: Utilize Rust's asynchronous networking libraries to handle
+    ingress and potentially egress traffic based on the Gateway API resources'
+    configurations.
 
 4. Extensibility and Compliance
 Extensibility
 
-    Custom Filters and Actions: Consider how to implement support for custom filters and actions as described by the Gateway API, allowing for future extensibility.
+    Custom Filters and Actions: Consider how to implement support for custom
+    filters and actions as described by the Gateway API, allowing for future
+    extensibility.
 
 Compliance and Testing
 
-    Conformance Testing: Keep an eye on Gateway API conformance tests (as they become available) to ensure your implementation is compliant with the specifications.
+    Conformance Testing: Keep an eye on Gateway API conformance tests (as they
+    become available) to ensure your implementation is compliant with the
+    specifications.
 
 5. Monitoring, Logging, and Observability
 Integration
 
-    eBPF for Observability: Explore using eBPF for advanced monitoring and observability features, capturing metrics and logs relevant to the Gateway API traffic handling.
+    eBPF for Observability: Explore using eBPF for advanced monitoring and
+    observability features, capturing metrics and logs relevant to the Gateway
+    API traffic handling.
 
 Exposing Metrics
 
-    Prometheus: Ensure your implementation exposes metrics in a Prometheus-compatible format for easy integration with monitoring tools.
+    Prometheus: Ensure your implementation exposes metrics in a
+    Prometheus-compatible format for easy integration with monitoring tools.
 
 6. Documentation and Community Engagement
 Documentation
 
-    Comprehensive Docs: Write clear, comprehensive documentation covering setup, configuration, and usage of your Gateway API implementation.
+    Comprehensive Docs: Write clear, comprehensive documentation covering setup,
+    configuration, and usage of your Gateway API implementation.
 
 Community Engagement
 
-    Feedback and Collaboration: Engage with the Kubernetes and Gateway API communities for feedback, contributions, and to stay updated with the latest developments.
+    Feedback and Collaboration: Engage with the Kubernetes and Gateway API
+    communities for feedback, contributions, and to stay updated with the latest
+    developments.
 
 7. Continuous Learning and Contribution
 
-    Stay Informed: Keep up with the Gateway API's evolution, participating in SIG-Network meetings or discussions to contribute to and learn from the ongoing development of the API.
+    Stay Informed: Keep up with the Gateway API's evolution, participating in
+    SIG-Network meetings or discussions to contribute to and learn from the
+    ongoing development of the API.
