@@ -1274,7 +1274,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "nvie"
+name = "nvie-gateway"
 version = "0.1.0"
 dependencies = [
  "anyhow",

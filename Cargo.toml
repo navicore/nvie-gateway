@@ -1,5 +1,5 @@
 [package]
-name = "nvie"
+name = "nvie-gateway"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
@@ -7,8 +7,8 @@ license = "MIT"
 authors = ["Ed Sweeney <ed@onextent.com>"]
 description = "A Kubernetes Gateway API Implementation in Rust"
 keywords = ["kubernetes", "k8s", "ingress"]
-documentation = "https://docs.rs/nvi"
-repository = "https://github.com/navicore/nvi"
+documentation = "https://docs.rs/nvie-gateway"
+repository = "https://github.com/navicore/nvie-gateway"
 
 [dependencies]
 chrono = "0.4"
